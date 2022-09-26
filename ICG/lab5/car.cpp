@@ -17,77 +17,32 @@ void draw_car(void) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glColor3f(0, 0, 0);
-	// glBegin(GL_POLYGON);
-   	// 	glVertex2i(car_x+0, WIDTH*1.0/7);
-   	// 	glVertex2i(car_x+0, WIDTH*1.0/7 + HEIGHT*1.75/10);
-   	// 	glVertex2i(car_x+WIDTH, WIDTH*1.0/7 + HEIGHT*1.75/10);
-   	// 	glVertex2i(car_x+WIDTH, WIDTH*1.0/7);
-	// glEnd();
-	line l1;
-	BLD(car_x+0, WIDTH*1.0/7, car_x+0, WIDTH*1.0/7 + HEIGHT*1.75/10, &l1);
-	BLD(car_x+0, WIDTH*1.0/7 + HEIGHT*1.75/10, car_x+WIDTH, WIDTH*1.0/7 + HEIGHT*1.75/10, &l1);
-	BLD(car_x+WIDTH, WIDTH*1.0/7 + HEIGHT*1.75/10, car_x+WIDTH, WIDTH*1.0/7, &l1);
-	BLD(car_x+WIDTH, WIDTH*1.0/7, car_x+0, WIDTH*1.0/7, &l1);
-
-	BLD(car_x+WIDTH*2.0/7, WIDTH*1.0/7 + HEIGHT*1.75/10, car_x+WIDTH*3.5/7, WIDTH*1.0/7 + HEIGHT*3/10, &l1);
-	BLD(car_x+WIDTH*3.5/7, WIDTH*1.0/7 + HEIGHT*3/10, car_x+WIDTH*6/7, WIDTH*1.0/7 + HEIGHT*3/10, &l1);
-	BLD(car_x+WIDTH*6/7, WIDTH*1.0/7 + HEIGHT*3/10, car_x+WIDTH, WIDTH*1.0/7 + HEIGHT*1.75/10, &l1);
-	BLD(car_x+WIDTH, WIDTH*1.0/7 + HEIGHT*1.75/10, car_x+WIDTH*2.0/7, WIDTH*1.0/7 + HEIGHT*1.75/10, &l1);
-
-	BLD(car_x+WIDTH*2.3/7, WIDTH*1.0/7 + HEIGHT*1.85/10, car_x+WIDTH*6.8/7, WIDTH*1.0/7 + HEIGHT*1.85/10, &l1);
-	BLD(car_x+WIDTH*3.60/7, WIDTH*1.0/7 + HEIGHT*2.9/10, car_x+WIDTH*2.3/7, WIDTH*1.0/7 + HEIGHT*1.85/10, &l1);
-	BLD(car_x+WIDTH*5.9/7, WIDTH*1.0/7 + HEIGHT*2.9/10, car_x+WIDTH*3.60/7, WIDTH*1.0/7 + HEIGHT*2.9/10, &l1);
-	BLD(car_x+WIDTH*6.8/7, WIDTH*1.0/7 + HEIGHT*1.85/10, car_x+WIDTH*5.9/7, WIDTH*1.0/7 + HEIGHT*2.9/10, &l1);
-
-	glPointSize(2);
-	glBegin(GL_POINTS);
-		for (auto i: l1) {
-			glVertex2d(i.first, i.second);
-		}
-	glEnd();
-	glFlush();
-	glColor3f(0, 0, 0);
-
-	glBegin(GL_POLYGON);
-
-	glEnd();
-
-	int radius 	= WIDTH*0.8/7;
-	int centerx = car_x+WIDTH*2.0/7;
-	int centery = WIDTH*1.0/7;
+	int radius 	= 360;
+	int centerx = 720;
+	int centery = 720;
 	circle wheel1 = MCD(centerx, centery, radius);
-	// cout << centerx << ", " << centery << "\n";
-	
-	glPointSize(5);
-	glColor3f(0.86,0.86,0.86);
-	glBegin(GL_POINTS);
-		glVertex2d(centerx, centery);
+	cout << wheel1.size() << "\n";
+	int alpha = 90;
+	int beta = 180;
 
+	// int alpha_idx = alpha * wheel1.size() / 360;
+	// int beta_idx = beta * wheel1.size() / 360;
+
+	int alpha_idx = 0;
+	int beta_idx = 100;
+
+	glPointSize(5);
+	glColor3f(0.0, 1.00, 0.0);
+	glBegin(GL_POINTS);
+		// for (int i = alpha_idx; i < beta_idx; i++) {
+		// 	glVertex2d(wheel1[i].first, wheel1[i].second);
+		// }
 		for (auto i: wheel1) {
 			glVertex2d(i.first, i.second);
 		}
 	glEnd();
 	glFlush();
 
-	radius 	= WIDTH*0.8/7;
-	centerx = car_x+WIDTH*5.5/7;
-	centery = WIDTH*1.0/7;
-	circle wheel2 = MCD(centerx, centery, radius);
-	// cout << centerx << ", " << centery << "\n";
-	
-	glPointSize(2);
-	glColor3f(1.0,0.0,0.0);
-	glBegin(GL_POINTS);
-		glVertex2d(centerx, centery);
-
-		for (auto i: wheel2) {
-			glVertex2d(i.first, i.second);
-		}
-	glEnd();
-	glFlush();
 }
 
 void move_car(unsigned char key, int x, int y) {
